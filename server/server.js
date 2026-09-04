@@ -39,6 +39,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 
+// Render (and similar hosts) ping the bare root URL as a health check
+app.get('/', (req, res) => res.json({ success: true, message: 'Hirely API is running' }));
 app.get('/api/health', (req, res) => res.json({ success: true, message: 'API is running' }));
 
 app.use('/api/auth', authRoutes);
