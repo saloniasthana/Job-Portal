@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand: deep violet ink + electric indigo + warm amber accent.
+     These are the DARK-theme defaults; :root[data-theme="light"] below
+     overrides the ones that need to flip. */
+  --color-ink-950: #0a0a12;
+  --color-ink-900: #101018;
+  --color-ink-800: #17171f;
+  --color-ink-700: #1f1f2b;
+  --color-ink-600: #2a2a3a;
+  --color-ink-500: #46465c;
+  --color-ink-400: #6d6d87;
+  --color-ink-300: #9797ac;
+  --color-ink-200: #c4c4d3;
+  --color-ink-100: #e6e6ee;
+  --color-ink-50: #f5f5fa;
+
+  /* Fixed — dark text sitting on the brand/amber gradient avatar badges.
+     Never flips: that gradient stays vivid in both themes. */
+  --color-accent-ink: #0a0a12;
+
+  /* Neutral overlay tint for subtle surfaces/borders/hover states
+     (replaces raw `white` so those overlays flip with the theme). */
+  --color-mist: #ffffff;
+
+  --color-brand-600: #5b3df0;
+  --color-brand-500: #7c5cfa;
+  --color-brand-400: #9b81ff;
+  --color-brand-300: #c1b0ff;
+
+  --color-amber-500: #ffb020;
+  --color-amber-400: #ffc357;
+
+  --color-mint-500: #2dd4a7;
+  --color-coral-500: #ff6b6b;
+
+  --color-glow-1: rgba(124, 92, 250, 0.22);
+  --color-glow-2: rgba(255, 176, 32, 0.12);
+  --color-hero-glow-1: rgba(124, 92, 250, 0.35);
+  --color-hero-glow-2: rgba(255, 176, 32, 0.18);
+
+  --shadow-glow: 0 0 0 1px rgba(124,92,250,0.15), 0 8px 40px -8px rgba(91,61,240,0.45);
+}
+
+html {
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="light"] {
+  --color-ink-950: #f7f7fb;
+  --color-ink-900: #ffffff;
+  --color-ink-800: #f0eff7;
+  --color-ink-700: #e3e1ee;
+  --color-ink-600: #c9c6db;
+  --color-ink-500: #8f8ba6;
+  --color-ink-400: #6b6784;
+  --color-ink-300: #4c4863;
+  --color-ink-200: #332f4a;
+  --color-ink-100: #1f1c33;
+  --color-ink-50: #100e1f;
+
+  --color-mist: #0a0a12;
+
+  /* Deepened so text/icons stay legible on a light background —
+     brand-400/500/600 and amber-500 are unchanged: they're only ever
+     used as gradient/button backgrounds, which read fine either way. */
+  --color-brand-300: #5433c9;
+  --color-amber-400: #b45f06;
+  --color-mint-500: #0f9d76;
+  --color-coral-500: #dc2626;
+
+  --color-glow-1: rgba(124, 92, 250, 0.07);
+  --color-glow-2: rgba(255, 176, 32, 0.05);
+  --color-hero-glow-1: rgba(124, 92, 250, 0.14);
+  --color-hero-glow-2: rgba(255, 176, 32, 0.1);
+}
+
+body {
+  @apply bg-ink-950 text-ink-100 font-sans antialiased;
+  background-image:
+    radial-gradient(circle at 15% -10%, var(--color-glow-1), transparent 45%),
+    radial-gradient(circle at 110% 10%, var(--color-glow-2), transparent 40%);
+  background-attachment: fixed;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--color-brand-500);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-600);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-500);
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .glass-panel {
+    @apply bg-mist/4 backdrop-blur-xl border border-mist/8;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, var(--color-brand-300), var(--color-amber-400));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
